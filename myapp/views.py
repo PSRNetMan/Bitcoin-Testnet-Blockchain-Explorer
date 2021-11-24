@@ -14,7 +14,7 @@ def index(request):
 
     payload = {"id": 0, "method": "getblockcount", "jsonrpc": "2.0"}
     response = requests.post(url, data=json.dumps(payload), headers=headers).json()
-    maxheight = response["result"]
+    maxheight = int(response["result"])
 
     if heightvar == '':
        return render(request, "myapp/home.html", {'result': "Height of most recent block is " + str(maxheight) + "."})
@@ -23,6 +23,9 @@ def index(request):
        heightint = int(heightvar)
     except:
        return render(request, "myapp/home.html", {'result': "ERROR: Input must be an Integer."})
+
+    if heightint < 0 or heightint > maxheight:
+       return render(request, "myapp/home.html", {'result': "ERROR: Input must be between 0 and " + str(maxheight) + "."})
 
     return render(request, "myapp/home.html", {'result': heightint})
 
