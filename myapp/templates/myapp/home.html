@@ -10,19 +10,23 @@
   <input type="submit" value="View Block">
 </form> 
 
-<p>
 {% if result %}
-{{result}}
+<p>{{result}}</p>
 {% endif %}
 
 {% if block %}
+<p>Details of Block {{block.height}}:</p><p>
 {% for x, y in block.items %}
 {% if x != "tx" %}
 {{x}}: {{y}}<br>
 {% endif %}
 {% endfor %}
+<br></p>
+<p>Transactions:</p><p>
+{% for x in block.tx %}
+<p>{{forloop.counter}}. {{x}}</p>
+{% endfor %}
 {% endif %}
-</p>
 
 </body>
 </html>
