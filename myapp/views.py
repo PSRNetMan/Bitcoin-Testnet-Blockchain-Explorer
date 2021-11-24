@@ -12,8 +12,11 @@ headers = {'content-type': 'application/json'}
 def index(request):
     height = request.GET.get('height', '')
 
-    invars = {'height': height}
-    return render(request, "myapp/home.html", invars)
+    payload = {"id": 0, "method": "getblockcount", "jsonrpc": "2.0"}
+    response = requests.post(url, data=json.dumps(payload), headers=headers).json()
+    maxheight = response["result"]
+
+    return render(request, "myapp/home.html", {'result': "Height of most recent block is " + str(maxheight) + "."})
 
 def exptest(request):
     prm = request.GET.get('anything', '')
