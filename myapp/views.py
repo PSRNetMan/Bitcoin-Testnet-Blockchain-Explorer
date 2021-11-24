@@ -29,8 +29,13 @@ def index(request):
 
     payload = {"id": 0, "method": "getblockhash", "params": [heightint], "jsonrpc": "2.0"}
     response = requests.post(url, data=json.dumps(payload), headers=headers).json()
+    mhash = response["result"]
 
-    return render(request, "myapp/home.html", {'result': response["result"]})
+    payload = {"id": 0, "method": "getblock", "params": [mhash], "jsonrpc": "2.0"}
+    response = requests.post(url, data=json.dumps(payload), headers=headers).json()
+    block = response["result"]
+
+    return render(request, "myapp/home.html", {'block': block})
 
 def exptest(request):
     prm = request.GET.get('anything', '')

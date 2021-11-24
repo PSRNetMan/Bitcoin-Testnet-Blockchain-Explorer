@@ -10,7 +10,19 @@
   <input type="submit" value="View Block">
 </form> 
 
-<p>{{result}}</p>
+<p>
+{% if result %}
+{{result}}
+{% endif %}
+
+{% if block %}
+{% for x, y in block.items %}
+{% if x != "tx" %}
+{{x}}: {{y}}<br>
+{% endif %}
+{% endfor %}
+{% endif %}
+</p>
 
 </body>
 </html>
