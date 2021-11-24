@@ -27,7 +27,10 @@ def index(request):
     if heightint < 0 or heightint > maxheight:
        return render(request, "myapp/home.html", {'result': "ERROR: Input must be between 0 and " + str(maxheight) + "."})
 
-    return render(request, "myapp/home.html", {'result': heightint})
+    payload = {"id": 0, "method": "getblockhash", "params": [heightint], "jsonrpc": "2.0"}
+    response = requests.post(url, data=json.dumps(payload), headers=headers).json()
+
+    return render(request, "myapp/home.html", {'result': response["result"]})
 
 def exptest(request):
     prm = request.GET.get('anything', '')
