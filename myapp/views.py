@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-import requests, json
+import requests, json, datetime
 
 user = "mainchain"
 password = "hotmax85"
@@ -10,7 +10,8 @@ headers = {'content-type': 'application/json'}
 
 # Create your views here.
 def index(request):
-    return render(request, "myapp/home.html")
+    invars = {'testvar': datetime.datetime.now()}
+    return render(request, "myapp/home.html", invars)
 
 def exptest(request):
     prm = request.GET.get('anything', '')
