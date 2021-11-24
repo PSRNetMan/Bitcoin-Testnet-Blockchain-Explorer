@@ -10,13 +10,21 @@ headers = {'content-type': 'application/json'}
 
 # Create your views here.
 def index(request):
-    height = request.GET.get('height', '')
+    heightvar = request.GET.get('height', '')
 
     payload = {"id": 0, "method": "getblockcount", "jsonrpc": "2.0"}
     response = requests.post(url, data=json.dumps(payload), headers=headers).json()
     maxheight = response["result"]
 
-    return render(request, "myapp/home.html", {'result': "Height of most recent block is " + str(maxheight) + "."})
+    if heightvar == '':
+       return render(request, "myapp/home.html", {'result': "Height of most recent block is " + str(maxheight) + "."})
+
+    try:
+       heightint = int(heightvar)
+    except:
+       return render(request, "myapp/home.html", {'result': "ERROR: Input must be an Integer."})
+
+    return render(request, "myapp/home.html", {'result': heightint})
 
 def exptest(request):
     prm = request.GET.get('anything', '')
