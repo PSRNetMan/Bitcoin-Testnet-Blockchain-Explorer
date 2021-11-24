@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html lang="en-US">
-  <head>
-    <meta charset="utf-8">
-    <title>My secure app</title>
-  </head>
-  <body>
-    <p>{{testvar}}</p>
-  </body>
+<html>
+<body>
+
+<h2 style="text-align: center;">Bitcoin Testnet Blockchain Explorer</h2>
+
+<form style="text-align: center;" action="/">
+  <label for="fname">Enter a Block's height:</label><br>
+  <input type="text" id="height" name="height" value=""><br>
+  <input type="submit" value="View Block">
+</form> 
+
+<p>{{height}}</p>
+
+</body>
 </html>
 

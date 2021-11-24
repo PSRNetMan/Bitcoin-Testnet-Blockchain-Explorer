@@ -10,7 +10,9 @@ headers = {'content-type': 'application/json'}
 
 # Create your views here.
 def index(request):
-    invars = {'testvar': datetime.datetime.now()}
+    height = request.GET.get('height', '')
+
+    invars = {'height': height}
     return render(request, "myapp/home.html", invars)
 
 def exptest(request):
